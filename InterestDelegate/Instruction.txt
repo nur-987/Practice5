@@ -1,0 +1,16 @@
+﻿MODIFIED VERSION 
+Uses Default Event Handlers
+Customise the Event Args to receive an argument 
+Do not need to use a delegate for this event 
+
+Two classes 
+1) program
+2)SimpleInterst_calc
+
+SimpleInterst_calc 
+-> delegate
+3 methods to set principal, interst, time 
+with exception handling 
+1 method to calculate simple interest
+with exception hndling
+1 event
