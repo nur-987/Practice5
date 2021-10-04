@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace EarthquakeEvents
 {
     delegate void TsunamiDelegate(double probability);
-    delegate void EarthQuakeDelegate();
+    delegate void EarthQuakeDelegate(double probability);
     class Earthquake
     {
         public event EarthQuakeDelegate EarthQuakeEvent;
@@ -22,21 +22,22 @@ namespace EarthquakeEvents
         {
             Location = tempLocation;
             Intesity = tempIntensity;
-
-            //if(EarthQuakeEvent!= null)
-            //{
-            //    EarthQuakeEvent.Invoke();
-            //}
-            //tsunami.CalculateProbabilityofTsunami(Intensity);
-
         }
 
         public void EarthQuakeOccured()
         {
             Console.WriteLine("EarthQuake happened");
+            tsunami.TsunamiEvent += Tsunami_TsunamiEvent;
             tsunami.CalculateProbabilityofTsunami(Intensity);
         }
 
+        private void Tsunami_TsunamiEvent(double probability)
+        {
+            if (EarthQuakeEvent != null)
+            {
+                EarthQuakeEvent.Invoke(probability);
+            }
+        }
     }
 
     class Tsunami
@@ -46,7 +47,7 @@ namespace EarthquakeEvents
         {
             //calculation
             Random random = new Random();
-            double probability = intensity * 0.7 + 0.3 * random.Next(0, 1);
+            double probability = intensity * 0.7 + 0.3 *random.NextDouble();
 
             if(TsunamiEvent != null)
             {
